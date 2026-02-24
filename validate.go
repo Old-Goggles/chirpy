@@ -11,7 +11,7 @@ func handlerValidateChirp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type returnValue struct {
-		Valid bool `json:"valid"`
+		CensoredChirp string `json:"cleaned_body"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -28,7 +28,9 @@ func handlerValidateChirp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	censored := censor(params.Body)
+
 	respondWithJSON(w, http.StatusOK, returnValue{
-		Valid: true,
+		CensoredChirp: censored,
 	})
 }
