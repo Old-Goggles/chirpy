@@ -29,7 +29,7 @@ func (cfg *apiConfig) handlerRefresh(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusUnauthorized, "Couldn't make JWT", err)
 		return
 	}
-	// 4. Respond with 200 and {"token": "<new access token>"}
+
 	respondWithJSON(w, http.StatusOK, response{
 		Token: newToken,
 	})
